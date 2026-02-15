@@ -1,5 +1,4 @@
-console.log("Інструкція до функції triangle:");
-console.log("Використовуйте: triangle(значення1, 'тип1', значення2, 'тип2')");
+console.log("Використання: triangle(val1, type1, val2, type2)");
 console.log("Типи: 'leg', 'hypotenuse', 'adjacent angle', 'opposite angle', 'angle'");
 
 function triangle(val1, type1, val2, type2) {
@@ -26,40 +25,35 @@ function triangle(val1, type1, val2, type2) {
         b = Math.sqrt(c * c - a * a);
         alpha = toDeg(Math.asin(a / c));
         beta = 90 - alpha;
-    } 
-    else if (type1 === 'leg' && type2 === 'leg') {
+    } else if (type1 === 'leg' && type2 === 'leg') {
         a = val1;
         b = val2;
         c = Math.sqrt(a * a + b * b);
         alpha = toDeg(Math.atan(a / b));
         beta = 90 - alpha;
-    }
-    else if (data['leg'] && data['adjacent angle']) {
+    } else if (data['leg'] && data['adjacent angle']) {
         a = data['leg'];
         beta = data['adjacent angle'];
         if (beta >= 90) return "failed";
         c = a / Math.cos(toRad(beta));
         b = Math.sqrt(c * c - a * a);
         alpha = 90 - beta;
-    }
-    else if (data['leg'] && data['opposite angle']) {
+    } else if (data['leg'] && data['opposite angle']) {
         a = data['leg'];
         alpha = data['opposite angle'];
         if (alpha >= 90) return "failed";
         c = a / Math.sin(toRad(alpha));
         b = Math.sqrt(c * c - a * a);
         beta = 90 - alpha;
-    }
-    else if (data['hypotenuse'] && data['angle']) {
+    } else if (data['hypotenuse'] && data['angle']) {
         c = data['hypotenuse'];
         alpha = data['angle'];
         if (alpha >= 90) return "failed";
         a = c * Math.sin(toRad(alpha));
         b = c * Math.cos(toRad(alpha));
         beta = 90 - alpha;
-    }
-    else {
-        console.log("Будь ласка, ще раз перечитайте інструкцію");
+    } else {
+        console.log("Please read instructions again");
         return "failed";
     }
 
@@ -69,5 +63,5 @@ function triangle(val1, type1, val2, type2) {
     console.log("alpha = " + alpha);
     console.log("beta = " + beta);
     
-    return "success"; 
+    return "success";
 }
