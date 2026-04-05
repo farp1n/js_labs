@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 4 - JavaScript Library</title>
+</head>
+<body>
+    <h1>Демонстрація Лабораторної роботи №4</h1>
+    <div id="status">Результати виведено в консоль (F12)</div>
 
+    <script src="sortLib.js"></script>
+    <script>
+        let normalArray = Array.from({length: 105}, () => Math.floor(Math.random() * 500));
+
+        let sparseArray = [1, 2, 3];
+        sparseArray[110] = 99;
+
+        console.log("ТЕСТ 1: НЕРОЗРІДЖЕНИЙ МАСИВ");
+        SortLib.bubbleSort([...normalArray]);
+        SortLib.selectionSort([...normalArray]);
+        SortLib.insertionSort([...normalArray]);
+        SortLib.shellSort([...normalArray]);
+        SortLib.quickSort([...normalArray]);
+
+        console.log("\nТЕСТ 2: РОЗРІДЖЕНИЙ МАСИВ");
+        SortLib.bubbleSort([...sparseArray]);
+        SortLib.selectionSort([...sparseArray]);
+        SortLib.insertionSort([...sparseArray]);
+        SortLib.shellSort([...sparseArray]);
+        SortLib.quickSort([...sparseArray]);
+    </script>
+</body>
+</html>
