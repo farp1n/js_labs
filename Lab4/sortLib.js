@@ -1,18 +1,18 @@
 const SortLib = {
-    printStats: function(methodName, comparisons, swaps, hasUndefined) {
+    printStats: function(methodName, comparisons, swaps, hasUndefined, result) {
         console.log(`--- ${methodName} ---`);
         console.log(`Порівнянь: ${comparisons}`);
         console.log(`Обмінів/Переміщень: ${swaps}`);
         if (hasUndefined) {
             console.log("Виявлено елементи undefined");
         }
+        console.log("Результат:", result);
     },
 
     prepareArray: function(arr) {
         let hasUndefined = false;
         let cleanArr = [];
         let undefinedCount = 0;
-
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === undefined) {
                 hasUndefined = true;
@@ -27,7 +27,6 @@ const SortLib = {
     bubbleSort: function(inputArray, ascending = true) {
         let { cleanArr: arr, undefinedCount, hasUndefined } = this.prepareArray(inputArray);
         let comparisons = 0, swaps = 0;
-
         for (let i = 0; i < arr.length; i++) {
             for (let j = 0; j < arr.length - 1 - i; j++) {
                 comparisons++;
@@ -38,16 +37,14 @@ const SortLib = {
                 }
             }
         }
-        
         const result = arr.concat(new Array(undefinedCount).fill(undefined));
-        this.printStats("Сортування обміном", comparisons, swaps, hasUndefined);
+        this.printStats("Сортування обміном", comparisons, swaps, hasUndefined, result);
         return result;
     },
 
     selectionSort: function(inputArray, ascending = true) {
         let { cleanArr: arr, undefinedCount, hasUndefined } = this.prepareArray(inputArray);
         let comparisons = 0, swaps = 0;
-
         for (let i = 0; i < arr.length - 1; i++) {
             let minMaxIdx = i;
             for (let j = i + 1; j < arr.length; j++) {
@@ -60,16 +57,14 @@ const SortLib = {
                 swaps++;
             }
         }
-
         const result = arr.concat(new Array(undefinedCount).fill(undefined));
-        this.printStats("Сортування мінімальних елементів", comparisons, swaps, hasUndefined);
+        this.printStats("Сортування мінімальних елементів", comparisons, swaps, hasUndefined, result);
         return result;
     },
 
     insertionSort: function(inputArray, ascending = true) {
         let { cleanArr: arr, undefinedCount, hasUndefined } = this.prepareArray(inputArray);
         let comparisons = 0, swaps = 0;
-
         for (let i = 1; i < arr.length; i++) {
             let key = arr[i];
             let j = i - 1;
@@ -84,9 +79,8 @@ const SortLib = {
             }
             arr[j + 1] = key;
         }
-
         const result = arr.concat(new Array(undefinedCount).fill(undefined));
-        this.printStats("Сортування вставками", comparisons, swaps, hasUndefined);
+        this.printStats("Сортування вставками", comparisons, swaps, hasUndefined, result);
         return result;
     },
 
@@ -94,7 +88,6 @@ const SortLib = {
         let { cleanArr: arr, undefinedCount, hasUndefined } = this.prepareArray(inputArray);
         let comparisons = 0, swaps = 0;
         let n = arr.length;
-
         for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
             for (let i = gap; i < n; i++) {
                 let temp = arr[i];
@@ -110,16 +103,14 @@ const SortLib = {
                 arr[j] = temp;
             }
         }
-
         const result = arr.concat(new Array(undefinedCount).fill(undefined));
-        this.printStats("Сортування Шелла", comparisons, swaps, hasUndefined);
+        this.printStats("Сортування Шелла", comparisons, swaps, hasUndefined, result);
         return result;
     },
 
     quickSort: function(inputArray, ascending = true) {
         let { cleanArr: arr, undefinedCount, hasUndefined } = this.prepareArray(inputArray);
         let comparisons = 0, swaps = 0;
-
         const partition = (low, high) => {
             let pivot = arr[Math.floor((low + high) / 2)];
             let i = low, j = high;
@@ -141,17 +132,15 @@ const SortLib = {
             }
             return i;
         };
-
         const sort = (low, high) => {
             if (arr.length <= 1) return;
             let index = partition(low, high);
             if (low < index - 1) sort(low, index - 1);
             if (index < high) sort(index, high);
         };
-
         sort(0, arr.length - 1);
         const result = arr.concat(new Array(undefinedCount).fill(undefined));
-        this.printStats("Сортування Хоара", comparisons, swaps, hasUndefined);
+        this.printStats("Сортування Хоара", comparisons, swaps, hasUndefined, result);
         return result;
     }
 };
