@@ -2,38 +2,46 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Lab 5 - Clicker Game</title>
+    <title>Lab 5 - Pro Clicker</title>
     <style>
-        body { font-family: sans-serif; text-align: center; }
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background: #222; color: white; }
         #game-area { 
             width: 800px; height: 500px; 
-            border: 3px solid #333; margin: 20px auto; 
-            display: none; position: relative; background: #eee;
-            overflow: hidden;
+            border: 4px solid #444; margin: 20px auto; 
+            display: none; position: relative; background: #333;
+            overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
-        .target { position: absolute; cursor: pointer; border: 1px solid #000; }
-        .menu { border: 1px solid #ccc; padding: 20px; display: inline-block; }
+        .target { position: absolute; cursor: crosshair; border: 2px solid white; transition: transform 0.1s; }
+        .target:active { transform: scale(0.8); }
+        .stats { font-size: 20px; margin: 10px; display: none; }
+        .menu { background: #444; padding: 30px; border-radius: 10px; display: inline-block; margin-top: 50px; }
+        #timer-bar { width: 100%; height: 10px; background: #e74c3c; position: absolute; top: 0; left: 0; transition: width 0.1s linear; }
     </style>
 </head>
 <body>
     <div id="setup">
-        <h1>Налаштування гри</h1>
+        <h1>Aim Lab - Lab 5</h1>
         <div class="menu">
-            <h3>Складність:</h3>
-            <input type="radio" name="diff" value="easy" id="e"> <label for="e">Легко</label>
-            <input type="radio" name="diff" value="medium" id="m"> <label for="m">Середньо</label>
-            <input type="radio" name="diff" value="hard" id="h"> <label for="h">Важко</label>
-
+            <h3>Важкість:</h3>
+            <input type="radio" name="diff" value="easy" id="e"> <label for="e">Легко (4с)</label>
+            <input type="radio" name="diff" value="medium" id="m"> <label for="m">Середньо (2с)</label>
+            <input type="radio" name="diff" value="hard" id="h"> <label for="h">Важко (1с)</label>
             <h3>Колір:</h3>
             <input type="radio" name="clr" value="red" id="r"> <label for="r">Червоний</label>
             <input type="radio" name="clr" value="green" id="g"> <label for="g">Зелений</label>
             <input type="radio" name="clr" value="blue" id="b"> <label for="b">Синій</label>
             <br><br>
-            <button id="startBtn">СТАРТ</button>
+            <button id="startBtn" style="padding: 10px 30px; cursor: pointer;">ПОЧАТИ ГРУ</button>
         </div>
     </div>
 
-    <div id="game-area"></div>
+    <div class="stats" id="stats-ui">
+        Очки: <span id="score">0</span> | Час: <span id="time-left">0</span>с
+    </div>
+
+    <div id="game-area">
+        <div id="timer-bar"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
