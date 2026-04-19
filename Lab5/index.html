@@ -2,35 +2,37 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Clicker - Lab 5</title>
+    <title>Lab 5 - Clicker Game</title>
     <style>
-        #game-screen { width: 800px; height: 600px; border: 2px solid #333; position: relative; display: none; overflow: hidden; background: #f0f0f0; }
-        .target { position: absolute; cursor: pointer; border-radius: 4px; }
-        .setup-section { margin-bottom: 20px; }
+        body { font-family: sans-serif; text-align: center; }
+        #game-area { 
+            width: 800px; height: 500px; 
+            border: 3px solid #333; margin: 20px auto; 
+            display: none; position: relative; background: #eee;
+        }
+        .target { position: absolute; cursor: pointer; border: 1px solid #000; }
+        .menu { border: 1px solid #ccc; padding: 20px; display: inline-block; }
     </style>
 </head>
 <body>
-    <div id="setup-screen">
+    <div id="setup">
         <h1>Налаштування гри</h1>
-        
-        <div class="setup-section">
-            <h3>Оберіть складність:</h3>
-            <input type="radio" name="difficulty" value="easy" id="d1"> <label for="d1">Легко (4с, великі)</label><br>
-            <input type="radio" name="difficulty" value="medium" id="d2"> <label for="d2">Середньо (2с, середні)</label><br>
-            <input type="radio" name="difficulty" value="hard" id="d3"> <label for="d3">Важко (1с, малі)</label>
-        </div>
+        <div class="menu">
+            <h3>Складність:</h3>
+            <input type="radio" name="diff" value="easy" id="e"> <label for="e">Легко</label>
+            <input type="radio" name="diff" value="medium" id="m"> <label for="m">Середньо</label>
+            <input type="radio" name="diff" value="hard" id="h"> <label for="h">Важко</label>
 
-        <div class="setup-section">
-            <h3>Колір квадрата:</h3>
-            <input type="radio" name="color" value="red" id="c1"> <label for="c1">Червоний</label><br>
-            <input type="radio" name="color" value="green" id="c2"> <label for="c2">Зелений</label><br>
-            <input type="radio" name="color" value="blue" id="c3"> <label for="c3">Синій</label>
+            <h3>Колір:</h3>
+            <input type="radio" name="clr" value="red" id="r"> <label for="r">Червоний</label>
+            <input type="radio" name="clr" value="green" id="g"> <label for="g">Зелений</label>
+            <input type="radio" name="clr" value="blue" id="b"> <label for="b">Синій</label>
+            <br><br>
+            <button id="startBtn">СТАРТ</button>
         </div>
-
-        <button id="startBtn">Старт</button>
     </div>
 
-    <div id="game-screen"></div>
+    <div id="game-area"></div>
 
     <script src="script.js"></script>
 </body>
