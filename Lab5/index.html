@@ -2,15 +2,35 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Лабораторна робота №5</title>
+    <title>Clicker - Lab 5</title>
+    <style>
+        #game-screen { width: 800px; height: 600px; border: 2px solid #333; position: relative; display: none; overflow: hidden; background: #f0f0f0; }
+        .target { position: absolute; cursor: pointer; border-radius: 4px; }
+        .setup-section { margin-bottom: 20px; }
+    </style>
 </head>
 <body>
-    <h1>Взаємодія з користувачем</h1>
-    
-    <input type="text" id="userName" placeholder="Введіть ваше ім'я">
-    <button id="greetBtn">Привітати</button>
-    
-    <div id="result"></div>
+    <div id="setup-screen">
+        <h1>Налаштування гри</h1>
+        
+        <div class="setup-section">
+            <h3>Оберіть складність:</h3>
+            <input type="radio" name="difficulty" value="easy" id="d1"> <label for="d1">Легко (4с, великі)</label><br>
+            <input type="radio" name="difficulty" value="medium" id="d2"> <label for="d2">Середньо (2с, середні)</label><br>
+            <input type="radio" name="difficulty" value="hard" id="d3"> <label for="d3">Важко (1с, малі)</label>
+        </div>
+
+        <div class="setup-section">
+            <h3>Колір квадрата:</h3>
+            <input type="radio" name="color" value="red" id="c1"> <label for="c1">Червоний</label><br>
+            <input type="radio" name="color" value="green" id="c2"> <label for="c2">Зелений</label><br>
+            <input type="radio" name="color" value="blue" id="c3"> <label for="c3">Синій</label>
+        </div>
+
+        <button id="startBtn">Старт</button>
+    </div>
+
+    <div id="game-screen"></div>
 
     <script src="script.js"></script>
 </body>
