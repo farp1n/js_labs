@@ -70,7 +70,7 @@ function click(i, j) {
     
     const offCells = document.querySelectorAll('.off');
     if (offCells.length === 0) {
-        document.getElementById('status').textContent = "ПЕРЕМОГА! ВСЕ УКВІМКНЕНО";
+        document.getElementById('status').textContent = "ПЕРЕМОГА!";
     }
 }
 
