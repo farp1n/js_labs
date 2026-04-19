@@ -37,7 +37,7 @@ function startGame(config, color) {
 
     const createTarget = () => {
        
-        gameScreen.innerHTML = ''; [cite: 21]
+        gameScreen.innerHTML = ''; 
 
         const target = document.createElement('div');
         target.className = 'target';
