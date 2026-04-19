@@ -1,64 +1,101 @@
 const startBtn = document.getElementById('startBtn');
 const setupScreen = document.getElementById('setup');
 const gameScreen = document.getElementById('game-area');
+const scoreDisplay = document.getElementById('score');
+const timeLeftDisplay = document.getElementById('time-left');
+const timerBar = document.getElementById('timer-bar');
+const statsUI = document.getElementById('stats-ui');
 
-let gameInterval;
+let score = 0;
+let timeLeft;
+let gameActive = false;
+let countdownInterval;
+let currentConfig;
+let currentColor;
 
 startBtn.addEventListener('click', () => {
-    
     const selectedDiff = document.querySelector('input[name="diff"]:checked');
     const colorVal = document.querySelector('input[name="clr"]:checked');
 
     if (!selectedDiff || !colorVal) {
-        alert("Оберіть і складність, і колір!");
+        alert("Вибери параметри!");
         return;
     }
 
     
-    let config = { time: 4000, size: 60, range: 400 }; 
-    
-    if (selectedDiff.value === 'medium') {
-        config = { time: 2000, size: 40, range: 600 };
-    } else if (selectedDiff.value === 'hard') {
-        config = { time: 1000, size: 20, range: 750 };
+    if (selectedDiff.value === 'easy') {
+        currentConfig = { time: 4000, size: 70, areaW: 300, areaH: 200 };
+    } else if (selectedDiff.value === 'medium') {
+        currentConfig = { time: 2000, size: 45, areaW: 500, areaH: 350 };
+    } else {
+        currentConfig = { time: 1000, size: 25, areaW: 770, areaH: 470 };
     }
 
-   
+    currentColor = colorVal.value;
+    score = 0;
+    gameActive = true;
+
     setupScreen.style.display = 'none';
     gameScreen.style.display = 'block';
+    statsUI.style.display = 'block';
 
-    startGame(config, colorVal.value);
+    nextTurn();
 });
 
-function startGame(config, color) {
-    if (gameInterval) clearInterval(gameInterval);
+function nextTurn() {
+    if (!gameActive) return;
 
-    const createTarget = () => {
-        gameScreen.innerHTML = ''; 
+    // Очистка поля
+    const oldTarget = document.querySelector('.target');
+    if (oldTarget) oldTarget.remove();
 
-        const target = document.createElement('div');
-        target.className = 'target';
-        
-        target.style.width = config.size + 'px';
-        target.style.height = config.size + 'px';
-        target.style.backgroundColor = color;
+    
+    const target = document.createElement('div');
+    target.className = 'target';
+    target.style.width = currentConfig.size + 'px';
+    target.style.height = currentConfig.size + 'px';
+    target.style.backgroundColor = currentColor;
 
-       
-        const maxX = Math.min(config.range, 800 - config.size);
-        const maxY = Math.min(config.range, 500 - config.size);
-        
-        target.style.left = Math.random() * maxX + 'px';
-        target.style.top = Math.random() * maxY + 'px';
+    
+    const x = Math.random() * currentConfig.areaW;
+    const y = Math.random() * currentConfig.areaH;
+    target.style.left = x + 'px';
+    target.style.top = y + 'px';
 
-        target.onclick = () => {
-            createTarget(); 
-            clearInterval(gameInterval); 
-            gameInterval = setInterval(createTarget, config.time);
-        };
-
-        gameScreen.appendChild(target);
+    target.onclick = (e) => {
+        e.stopPropagation(); 
+        score++;
+        scoreDisplay.textContent = score;
+        clearInterval(countdownInterval);
+        nextTurn();
     };
 
-    createTarget();
-    gameInterval = setInterval(createTarget, config.time);
+    gameScreen.appendChild(target);
+    startTimer();
+}
+
+function startTimer() {
+    clearInterval(countdownInterval);
+    timeLeft = currentConfig.time;
+    
+    const step = 100; 
+    countdownInterval = setInterval(() => {
+        timeLeft -= step;
+        
+        
+        timeLeftDisplay.textContent = (timeLeft / 1000).toFixed(1);
+        const percent = (timeLeft / currentConfig.time) * 100;
+        timerBar.style.width = percent + "%";
+
+        if (timeLeft <= 0) {
+            gameOver();
+        }
+    }, step);
+}
+
+function gameOver() {
+    gameActive = false;
+    clearInterval(countdownInterval);
+    alert("Кінець гри! Ваші очки: " + score);
+    location.reload(); 
 }
