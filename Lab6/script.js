@@ -1,48 +1,19 @@
-const levels = [
-    {
-        id: 'a',
-        target: 7,
-        matrix: [
-            [1, 1, 1, 1, 1],
-            [0, 0, 1, 0, 0],
-            [1, 0, 1, 0, 1],
-            [1, 0, 1, 1, 1],
-            [0, 1, 0, 0, 1]
-        ]
-    },
-    {
-        id: 'b',
-        target: 8,
-        matrix: [
-            [1, 0, 1, 0, 0],
-            [0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 0],
-            [0, 0, 1, 0, 0],
-            [0, 1, 1, 1, 0]
-        ]
-    },
-    {
-        id: 'c',
-        target: 9,
-        matrix: [
-            [1, 0, 0, 0, 0],
-            [0, 1, 1, 0, 1],
-            [1, 0, 0, 1, 1],
-            [0, 0, 1, 1, 1],
-            [1, 1, 0, 0, 0]
-        ]
-    }
-];
-
-const lvl = levels[Math.floor(Math.random() * levels.length)];
+let lvl;
 let moves = 0;
 let lastPos = null;
 const board = document.getElementById('game-board');
 
-document.getElementById('lvl-id').textContent = lvl.id;
-document.getElementById('target-moves').textContent = lvl.target;
+fetch('data/levels.json')
+    .then(response => response.json())
+    .then(data => {
+        lvl = data[Math.floor(Math.random() * data.length)];
+        document.getElementById('lvl-id').textContent = lvl.id;
+        document.getElementById('target-moves').textContent = lvl.target;
+        init();
+    });
 
 function init() {
+    board.innerHTML = ''; 
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 5; j++) {
             const cell = document.createElement('button');
@@ -67,10 +38,9 @@ function click(i, j) {
     document.getElementById('move-count').textContent = moves;
     toggle(i, j);
     
-    
     const offCells = document.querySelectorAll('.off');
     if (offCells.length === 0) {
-        document.getElementById('status').textContent = "ПЕРЕМОГА!";
+        document.getElementById('status').textContent = "ПЕРЕМОГА! ВСЕ УКВІМКНЕНО";
     }
 }
 
@@ -83,5 +53,3 @@ function toggle(i, j) {
         }
     });
 }
-
-init();
