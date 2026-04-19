@@ -67,8 +67,10 @@ function click(i, j) {
     document.getElementById('move-count').textContent = moves;
     toggle(i, j);
     
-    if (document.querySelectorAll('.on').length === 0) {
-        document.getElementById('status').textContent = "ПЕРЕМОГА!";
+    
+    const offCells = document.querySelectorAll('.off');
+    if (offCells.length === 0) {
+        document.getElementById('status').textContent = "ПЕРЕМОГА! ВСЕ УКВІМКНЕНО";
     }
 }
 
