@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна 6 - Lights Out</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; background: #f4f4f4; }
+        .grid { display: grid; gap: 8px; margin: 20px 0; }
+        .cell { width: 60px; height: 60px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .on { background: #fbc531; box-shadow: 0 0 15px #fbc531; }
+        .off { background: #353b48; }
+        .stats { font-size: 1.2rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Гра "Lights Out"</h1>
+    <div class="stats">Ходів: <span id="move-count">0</span></div>
+    <div id="game-board" class="grid"></div>
+    <h2 id="status">Згаси всі вогні!</h2>
+    <button onclick="location.reload()">Рандомний рівень</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
