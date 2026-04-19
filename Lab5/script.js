@@ -24,16 +24,17 @@ startBtn.addEventListener('click', () => {
 
     
     if (selectedDiff.value === 'easy') {
-        currentConfig = { time: 4000, size: 70, areaW: 300, areaH: 200 };
+        currentConfig = { time: 4000, size: 70, minX: 250, maxX: 550, minY: 150, maxY: 350 };
     } else if (selectedDiff.value === 'medium') {
-        currentConfig = { time: 2000, size: 45, areaW: 500, areaH: 350 };
+        currentConfig = { time: 2000, size: 45, minX: 100, maxX: 700, minY: 50, maxY: 450 };
     } else {
-        currentConfig = { time: 1000, size: 25, areaW: 770, areaH: 470 };
+        currentConfig = { time: 1000, size: 25, minX: 0, maxX: 775, minY: 0, maxY: 475 };
     }
 
     currentColor = colorVal.value;
     score = 0;
     gameActive = true;
+    scoreDisplay.textContent = score;
 
     setupScreen.style.display = 'none';
     gameScreen.style.display = 'block';
@@ -45,11 +46,10 @@ startBtn.addEventListener('click', () => {
 function nextTurn() {
     if (!gameActive) return;
 
-    // Очистка поля
+    
     const oldTarget = document.querySelector('.target');
     if (oldTarget) oldTarget.remove();
 
-    
     const target = document.createElement('div');
     target.className = 'target';
     target.style.width = currentConfig.size + 'px';
@@ -57,8 +57,9 @@ function nextTurn() {
     target.style.backgroundColor = currentColor;
 
     
-    const x = Math.random() * currentConfig.areaW;
-    const y = Math.random() * currentConfig.areaH;
+    const x = Math.floor(Math.random() * (currentConfig.maxX - currentConfig.minX)) + currentConfig.minX;
+    const y = Math.floor(Math.random() * (currentConfig.maxY - currentConfig.minY)) + currentConfig.minY;
+    
     target.style.left = x + 'px';
     target.style.top = y + 'px';
 
@@ -66,7 +67,7 @@ function nextTurn() {
         e.stopPropagation(); 
         score++;
         scoreDisplay.textContent = score;
-        clearInterval(countdownInterval);
+        clearInterval(countdownInterval); 
         nextTurn();
     };
 
@@ -82,7 +83,7 @@ function startTimer() {
     countdownInterval = setInterval(() => {
         timeLeft -= step;
         
-        
+       
         timeLeftDisplay.textContent = (timeLeft / 1000).toFixed(1);
         const percent = (timeLeft / currentConfig.time) * 100;
         timerBar.style.width = percent + "%";
