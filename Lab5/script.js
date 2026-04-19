@@ -18,17 +18,17 @@ startBtn.addEventListener('click', () => {
     const colorVal = document.querySelector('input[name="clr"]:checked');
 
     if (!selectedDiff || !colorVal) {
-        alert("Вибери параметри!");
+        alert("Будь ласка, оберіть усі налаштування!");
         return;
     }
 
     
     if (selectedDiff.value === 'easy') {
-        currentConfig = { time: 4000, size: 70, minX: 250, maxX: 550, minY: 150, maxY: 350 };
+        currentConfig = { level: 'easy', time: 4000, size: 70 };
     } else if (selectedDiff.value === 'medium') {
-        currentConfig = { time: 2000, size: 45, minX: 100, maxX: 700, minY: 50, maxY: 450 };
+        currentConfig = { level: 'medium', time: 2000, size: 45 };
     } else {
-        currentConfig = { time: 1000, size: 25, minX: 0, maxX: 775, minY: 0, maxY: 475 };
+        currentConfig = { level: 'hard', time: 1000, size: 25 };
     }
 
     currentColor = colorVal.value;
@@ -57,18 +57,32 @@ function nextTurn() {
     target.style.backgroundColor = currentColor;
 
     
-    const x = Math.floor(Math.random() * (currentConfig.maxX - currentConfig.minX)) + currentConfig.minX;
-    const y = Math.floor(Math.random() * (currentConfig.maxY - currentConfig.minY)) + currentConfig.minY;
+    const arenaW = gameScreen.clientWidth;
+    const arenaH = gameScreen.clientHeight;
+    let minX, maxX, minY, maxY;
+
+    if (currentConfig.level === 'easy') {
+        minX = arenaW * 0.3; maxX = arenaW * 0.7 - currentConfig.size;
+        minY = arenaH * 0.3; maxY = arenaH * 0.7 - currentConfig.size;
+    } else if (currentConfig.level === 'medium') {
+        minX = arenaW * 0.1; maxX = arenaW * 0.9 - currentConfig.size;
+        minY = arenaH * 0.1; maxY = arenaH * 0.9 - currentConfig.size;
+    } else {
+        minX = 0; maxX = arenaW - currentConfig.size;
+        minY = 0; maxY = arenaH - currentConfig.size;
+    }
+
+    const x = Math.floor(Math.random() * (maxX - minX)) + minX;
+    const y = Math.floor(Math.random() * (maxY - minY)) + minY;
     
     target.style.left = x + 'px';
     target.style.top = y + 'px';
 
     target.onclick = (e) => {
-        e.stopPropagation(); 
+        e.stopPropagation();
         score++;
         scoreDisplay.textContent = score;
-        clearInterval(countdownInterval); 
-        nextTurn();
+        nextTurn(); 
     };
 
     gameScreen.appendChild(target);
@@ -83,7 +97,7 @@ function startTimer() {
     countdownInterval = setInterval(() => {
         timeLeft -= step;
         
-       
+        
         timeLeftDisplay.textContent = (timeLeft / 1000).toFixed(1);
         const percent = (timeLeft / currentConfig.time) * 100;
         timerBar.style.width = percent + "%";
@@ -97,6 +111,6 @@ function startTimer() {
 function gameOver() {
     gameActive = false;
     clearInterval(countdownInterval);
-    alert("Кінець гри! Ваші очки: " + score);
+    alert("Гру закінчено! Ви набрали очок: " + score);
     location.reload(); 
 }
