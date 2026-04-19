@@ -1,14 +1,13 @@
 const startBtn = document.getElementById('startBtn');
-const setupScreen = document.getElementById('setup-screen');
-const gameScreen = document.getElementById('game-screen');
+const setupScreen = document.getElementById('setup');
+const gameScreen = document.getElementById('game-area');
 
 let gameInterval;
 
 startBtn.addEventListener('click', () => {
     
-    const selectedDiff = document.querySelector('input[name="difficulty"]:checked');
-    const selectedColor = document.querySelector('input[name="difficulty"]:checked'); 
-    const colorVal = document.querySelector('input[name="color"]:checked');
+    const selectedDiff = document.querySelector('input[name="diff"]:checked');
+    const colorVal = document.querySelector('input[name="clr"]:checked');
 
     if (!selectedDiff || !colorVal) {
         alert("Оберіть і складність, і колір!");
@@ -16,15 +15,15 @@ startBtn.addEventListener('click', () => {
     }
 
     
-    let config = { time: 4000, size: 60, area: 200 }; 
+    let config = { time: 4000, size: 60, range: 400 }; 
     
     if (selectedDiff.value === 'medium') {
-        config = { time: 2000, size: 40, area: 400 };
+        config = { time: 2000, size: 40, range: 600 };
     } else if (selectedDiff.value === 'hard') {
-        config = { time: 1000, size: 25, area: 750 };
+        config = { time: 1000, size: 20, range: 750 };
     }
 
-    
+   
     setupScreen.style.display = 'none';
     gameScreen.style.display = 'block';
 
@@ -32,24 +31,21 @@ startBtn.addEventListener('click', () => {
 });
 
 function startGame(config, color) {
-    
     if (gameInterval) clearInterval(gameInterval);
 
     const createTarget = () => {
-       
         gameScreen.innerHTML = ''; 
 
         const target = document.createElement('div');
         target.className = 'target';
         
-       
         target.style.width = config.size + 'px';
         target.style.height = config.size + 'px';
         target.style.backgroundColor = color;
 
-        
-        const maxX = Math.min(config.area, 740); 
-        const maxY = Math.min(config.area, 540);
+       
+        const maxX = Math.min(config.range, 800 - config.size);
+        const maxY = Math.min(config.range, 500 - config.size);
         
         target.style.left = Math.random() * maxX + 'px';
         target.style.top = Math.random() * maxY + 'px';
