@@ -25,6 +25,13 @@ function init() {
     }
 }
 
+function restartLevel() {
+    moves = 0;
+    lastPos = null;
+    document.getElementById('move-count').textContent = moves;
+    document.getElementById('status').textContent = '';
+    init();
+}
 function click(i, j) {
     const pos = `${i}-${j}`;
     if (lastPos === pos) {
