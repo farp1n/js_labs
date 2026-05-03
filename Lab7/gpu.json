@@ -1,0 +1,40 @@
+{
+  "category_name": "Відеокарти",
+  "items": [
+    {
+      "id": 201,
+      "name": "NVIDIA RTX 4090",
+      "shortname": "rtx-4090",
+      "description": "Безкомпромісна потужність для 4K геймінгу та AI.",
+      "price": "85000 грн"
+    },
+    {
+      "id": 202,
+      "name": "AMD Radeon RX 7900 XTX",
+      "shortname": "rx-7900xtx",
+      "description": "Флагман від AMD з величезним об'ємом відеопам'яті.",
+      "price": "48000 грн"
+    },
+    {
+      "id": 203,
+      "name": "NVIDIA RTX 4070 Super",
+      "shortname": "rtx-4070s",
+      "description": "Ідеальний баланс ціни та продуктивності для 1440p.",
+      "price": "32000 грн"
+    },
+    {
+      "id": 204,
+      "name": "NVIDIA RTX 4060 Ti",
+      "shortname": "rtx-4060ti",
+      "description": "Енергоефективна карта для популярних онлайн-ігор.",
+      "price": "19000 грн"
+    },
+    {
+      "id": 205,
+      "name": "AMD Radeon RX 7600",
+      "shortname": "rx-7600",
+      "description": "Доступне рішення для стабільного геймінгу у Full HD.",
+      "price": "13500 грн"
+    }
+  ]
+}
