@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота 7 - Ajax Shop</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f4f4f9; }
+        header { background: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; margin-left: 20px; text-decoration: none; cursor: pointer; }
+        main { padding: 20px; max-width: 1000px; margin: auto; }
+        .categories-list { display: flex; gap: 15px; list-style: none; padding: 0; }
+        .categories-list li { background: #007bff; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .product-card { background: white; border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; }
+        .product-card img { max-width: 200px; height: auto; border-radius: 4px; }
+        .special-link { margin-top: 20px; display: inline-block; color: #d9534f; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>TechStore</h1>
+    <nav>
+        <a href="index.html">Додому</a>
+        <a onclick="loadCatalog()">Каталог</a>
+    </nav>
+</header>
+
+<main id="main-content">
+    <h2>Вітаємо у нашому магазині!</h2>
+    <p>Виберіть "Каталог" для перегляду категорій.</p>
+</main>
+
+<script>
+    const mainContent = document.getElementById('main-content');
+
+    
+    function ajaxRequest(url, callback) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => callback(data))
+            .catch(error => console.error('Помилка завантаження:', error));
+    }
+
+    
+    function loadCatalog() {
+        ajaxRequest('categories.json', function(categories) {
+            let html = '<h2>Категорії товарів</h2><ul class="categories-list">';
+            categories.forEach(cat => {
+                html += `<li onclick="loadCategory('${cat.shortname}')">${cat.name}</li>`;
+            });
+            html += '</ul>';
+            html += `<a class="special-link" onclick="loadSpecials()">🔥 Specials (Випадкова категорія)</a>`;
+            mainContent.innerHTML = html;
+        });
+    }
+
+    
+    function loadCategory(shortname) {
+        ajaxRequest(`${shortname}.json`, function(data) {
+            let html = `<h2>${data.category_name}</h2>`;
+            html += '<div class="product-grid">';
+            data.items.forEach(item => {
+                html += `
+                    <div class="product-card">
+                        <img src="https://placehold.co/200x200?text=${item.shortname}" alt="${item.name}">
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <p><strong>Ціна: ${item.price}</strong></p>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            mainContent.innerHTML = html;
+        });
+    }
+
+    
+    function loadSpecials() {
+        ajaxRequest('categories.json', function(categories) {
+            const randomIndex = Math.floor(Math.random() * categories.length);
+            const randomCat = categories[randomIndex].shortname;
+            loadCategory(randomCat);
+        });
+    }
+</script>
+
+</body>
+</html>
