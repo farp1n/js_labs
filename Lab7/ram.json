@@ -1,0 +1,33 @@
+{
+  "category_name": "Оперативна пам'ять",
+  "items": [
+    {
+      "id": 301,
+      "name": "Kingston Fury Beast DDR5 32GB",
+      "shortname": "fury-ddr5",
+      "description": "Високошвидкісна пам'ять 6000MHz для нових платформ.",
+      "price": "55000 грн"
+    },
+    {
+      "id": 302,
+      "name": "G.Skill Trident Z5 RGB 16GB",
+      "shortname": "trident-z5",
+      "description": "Преміальний дизайн та низькі затримки (CL30).",
+      "price": "3800 грн"
+    },
+    {
+      "id": 303,
+      "name": "Corsair Vengeance LPX DDR4 16GB",
+      "shortname": "vengeance-ddr4",
+      "description": "Класичний вибір для надійних систем на базі DDR4.",
+      "price": "1800 грн"
+    },
+    {
+      "id": 304,
+      "name": "Crucial Pro DDR5 64GB Kit",
+      "shortname": "crucial-ddr5",
+      "description": "Набір великого об'єму для професійного відеомонтажу.",
+      "price": "9200 грн"
+    }
+  ]
+}
