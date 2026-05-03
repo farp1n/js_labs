@@ -50,7 +50,7 @@
                 html += `<li onclick="loadCategory('${cat.shortname}')">${cat.name}</li>`;
             });
             html += '</ul>';
-            html += `<a class="special-link" onclick="loadSpecials()">🔥 Specials (Випадкова категорія)</a>`;
+            html += `<a class="special-link" onclick="loadSpecials()"> Specials (Випадкова категорія)</a>`;
             mainContent.innerHTML = html;
         });
     }
@@ -63,7 +63,7 @@
             data.items.forEach(item => {
                 html += `
                     <div class="product-card">
-                        <img src="https://placehold.co/200x200?text=${item.shortname}" alt="${item.name}">
+                        <img src="https://picsum.photos/seed/${item.id}/200/200" alt="${item.name}">
                         <h3>${item.name}</h3>
                         <p>${item.description}</p>
                         <p><strong>Ціна: ${item.price}</strong></p>
