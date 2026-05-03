@@ -14,12 +14,13 @@
         .product-card { background: white; border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; }
         .product-card img { max-width: 200px; height: auto; border-radius: 4px; }
         .special-link { margin-top: 20px; display: inline-block; color: #d9534f; font-weight: bold; cursor: pointer; }
+        header h1:hover {color: #007bff; transition: 0.3s;}
     </style>
 </head>
 <body>
 
 <header>
-    <h1>TechStore</h1>
+    <h1 style="cursor: pointer;" onclick="location.reload()">TechStore</h1>
     <nav>
         <a href="index.html">Додому</a>
         <a onclick="loadCatalog()">Каталог</a>
