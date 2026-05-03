@@ -1,0 +1,33 @@
+{
+  "category_name": "Процесори",
+  "items": [
+    {
+      "id": 101,
+      "name": "Intel Core i9",
+      "shortname": "i9-14900k",
+      "description": "24 ядра, флагманська продуктивність.",
+      "price": "25000 грн"
+    },
+    {
+      "id": 102,
+      "name": "AMD Ryzen 9",
+      "shortname": "r9-7950x",
+      "description": "Найкращий вибір для робочих станцій.",
+      "price": "23000 грн"
+    },
+    {
+      "id": 103,
+      "name": "Intel Core i5",
+      "shortname": "i5-13600k",
+      "description": "Золотий стандарт для ігор.",
+      "price": "14000 грн"
+    },
+    {
+      "id": 104,
+      "name": "AMD Ryzen 5",
+      "shortname": "r5-7600",
+      "description": "Ефективність та швидкість.",
+      "price": "9000 грн"
+    }
+  ]
+}
