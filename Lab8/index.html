@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 8 - JS Ефекти</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <button class="hamburger" id="hamburger">☰</button>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#"><span class="icon">🏠</span> Головна</a></li>
+            <li><a href="#"><span class="icon">📁</span> Проекти</a></li>
+            <li><a href="#"><span class="icon">📞</span> Контакти</a></li>
+        </ul>
+    </nav>
+
+    <div class="carousel-container">
+        <div class="carousel-slide" id="carousel-slide">
+            <img src="https://placehold.co/800x400?text=Слайд+1" alt="Slide 1">
+            <img src="https://placehold.co/800x400?text=Слайд+2" alt="Slide 2">
+            <img src="https://placehold.co/800x400?text=Слайд+3" alt="Slide 3">
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">❮</button>
+        <button class="next" onclick="moveSlide(1)">❯</button>
+        <div class="indicators" id="indicators"></div>
+    </div>
+
+    <section class="content">
+        <div class="large-only">
+            <h3>Тільки для Large пристроїв (>=768px)</h3>
+            <img src="https://placehold.co/300x200?text=Large+Image+1" alt="Large 1">
+            <img src="https://placehold.co/300x200?text=Large+Image+2" alt="Large 2">
+        </div>
+        <div class="medium-only">
+            <h3>Тільки для Medium пристроїв (<768px)</h3>
+            <img src="https://placehold.co/300x200?text=Medium+Image+1" alt="Medium 1">
+            <img src="https://placehold.co/300x200?text=Medium+Image+2" alt="Medium 2">
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
