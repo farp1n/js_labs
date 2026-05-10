@@ -22,12 +22,13 @@ body { font-family: Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden
 .medium-only { display: none; }
 
 @media (max-width: 767px) {
-    .nav-menu { display: none; flex-direction: column; background: #444; width: 100%; position: absolute; top: 100%; left: 0; }
+    .navbar { display: flex; flex-direction: column; align-items: flex-start; }
+    .nav-menu { display: none;  flex-direction: column; background: #444; width: 100%;  position: relative;  top: 10px; left: 0; padding: 0; margin: 0; }
     .nav-menu.show { display: flex; animation: slideDown 0.4s ease forwards; }
-    .nav-menu a { padding: 10px; border-bottom: 1px solid #555; }
-    .nav-menu .icon { display: none; } 
-    .hamburger { display: block; }
-
+    .nav-menu li { width: 100%; }
+    .nav-menu a { padding: 15px; border-bottom: 1px solid #555; align-items: flex-start; width: 100%; box-sizing: border-box; }
+    .nav-menu .icon { display: none; }
+    .hamburger { display: block; align-self: flex-start; }
     .large-only { display: none; }
     .medium-only { display: block; }
 }
